@@ -1,0 +1,103 @@
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://maven.google.com" }
+        mavenCentral()
+    }
+}
+
+ext {
+//    Android
+    androidBuildToolsVersion = "28.0.1"
+    androidMinSdkVersion = 16
+    androidTargetSdkVersion = 28
+    androidCompileSdkVersion = 28
+    multiDexVersion = '1.0.1'
+
+    //libraries
+    androidSupportLibraryVersion = '27.1.1'
+    constraintLayoutVersion = '1.1.3'
+    glideVersion = '4.8.0'
+    daggerVersion = '2.1'
+
+    //Rx
+    rxJavaVersion = '2.2.0'
+    rxAndroidVersion = '2.0.2'
+
+    //network
+    jsoupVersion = '1.11.3'
+    retrofitVersion = '2.4.0'
+    gsonVersion = '2.8.5'
+
+    //testing
+    jUnitVersion = '4.12'
+    runnerVersion = '1.0.2'
+    espressoVersion = '3.0.2'
+
+    def androidLibs = [
+            appCompat   : [group: 'com.android.support', name: 'appcompat-v7', version: androidSupportLibraryVersion],
+            cardView    : [group: 'com.android.support', name: 'cardview-v7', version: androidSupportLibraryVersion],
+            design      : [group: 'com.android.support', name: 'design', version: androidSupportLibraryVersion],
+            constraint  : [group: 'com.android.support.constraint', name: 'constraint-layout', version: constraintLayoutVersion]
+    ]
+
+    def libs = [
+            jsoup       : [group: 'org.jsoup', name: 'jsoup', version: jsoupVersion],
+            retrofitRxJava2Adapter : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: retrofitVersion],
+            retrofitGsonConverter : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofitVersion],
+            rxJava      : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
+            rxAndroid   : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
+            gson        : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
+            glide         : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
+            glideCompiler         : [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
+            dagger : [group: 'com.google.dagger', name: 'dagger', version: daggerVersion],
+            daggerCompiler : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion]
+    ]
+
+    def testLibs = [
+            junit : [group: 'junit', name: 'junit', version: jUnitVersion],
+            runner : [group: 'com.android.support.test', name: 'runner', version: runnerVersion],
+            espresso : [group: 'com.android.support.test.espresso', name: 'espresso-core', version: espressoVersion]
+    ]
+
+    appDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "implementation", dependency: androidLibs.cardView],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testLibs.runner],
+            [configuration: "androidTestImplementation", dependency: testLibs.espresso],
+            [configuration: "implementation", dependency: androidLibs.design],
+            [configuration: "implementation", dependency: androidLibs.constraint],
+            [configuration: "implementation", dependency: libs.jsoup],
+            [configuration: "implementation", dependency: libs.gson],
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.glide],
+            [configuration: "annotationProcessor", dependency: libs.glideCompiler],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler]
+    ]
+
+    domainDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testLibs.runner],
+            [configuration: "androidTestImplementation", dependency: testLibs.espresso],
+            [configuration: "implementation", dependency: libs.retrofitRxJava2Adapter],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler]
+    ]
+
+    dataDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testLibs.runner],
+            [configuration: "androidTestImplementation", dependency: testLibs.espresso],
+            [configuration: "implementation", dependency: libs.retrofitGsonConverter],
+            [configuration: "implementation", dependency: libs.retrofitRxJava2Adapter],
+            [configuration: "implementation", dependency: libs.gson],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler]
+    ]
+}

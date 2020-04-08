@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+    def applicationVersionName = globalConfig.getAt("applicationVersionName")
+    def applicationVersionCode = globalConfig.getAt("applicationVersionCode")
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId globalConfig.getAt("applicationId")
+        minSdkVersion globalConfig.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfig.getAt("androidTargetSdkVersion")
+        versionCode applicationVersionCode
+        versionName applicationVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    rootProject.appDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
+}

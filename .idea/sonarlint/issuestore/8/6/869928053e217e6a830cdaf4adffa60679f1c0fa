@@ -1,0 +1,4 @@
+
+|squid:S1450 "YRemove the "sourceName" field and declare it as a local variable in the relevant methods.(‚óî¼üÿÿÿÿ8µ¨‰Ú•.
+ysquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(‰Ÿ´8†ÓØ•.
+~squid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(œ‚ñÀùÿÿÿÿ8µ¨‰Ú•.
